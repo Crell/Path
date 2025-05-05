@@ -1,5 +1,16 @@
 {
     "name": "crell/path",
+    "description": "Data model value objects for handling paths.",
+    "homepage": "https://github.com/Crell/Path",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Larry Garfield",
+            "email": "larry@garfieldtech.com",
+            "homepage": "http://www.garfieldtech.com/",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "~8.4"
     },
