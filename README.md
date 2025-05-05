@@ -1,9 +1,38 @@
-# Path
+# Pathlib
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
 
+`Crell/Path` is a simple library that provides typed value objects for handling paths.  Paths may be either a `PathFragment` (no leading `/`) or an `AbsolutePath`.  An `AbsolutePath` always begins either with a `/` or a stream identifier.
+
+At this time, paths are treated as abstract values and not coupled to a file system.  That functionality may be included at some point in the future.  Other feature requests (preferably with accompanying pull requests) are welcome.
+
+A Path object's primary purpose is to centralize and abstract away the various and sundry complexities and edge cases of manipulating paths: Getting a parent path (have to handle the case where there isn't one, with or without a stream), Concatenating two paths (have to handle the leading/trailing slashes, accounting for when one path or the other is the root path), and so on.
+
+```php
+use Crell\Path\Path;
+
+// Creates a Path Fragment
+$frag = Path::create('foo/bar');
+
+// Creates an Absolute Path
+$abs = Path::create('/baz/beep');
+
+$new = $abs->concat($frag);
+
+// Prints /baz/beep/foo/bar
+print $new;
+
+// Prints /baz/beep/foo
+print $new->parent();
+
+$file = '/narf.jpg';
+$fileAbs = $abs->concat($file);
+
+// Prints /baz/beep/narf.jpg
+print $fileAbs;
+```
 
 ## Contributing
 

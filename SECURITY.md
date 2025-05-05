@@ -6,15 +6,15 @@ Perfect security is not an achievable goal, but it is a goal to strive for nonet
 
 If you believe you've found a security issue in software that is maintained in this repository, we encourage you to notify us.
 
-| Version | In scope | Source code |
-| ------- | -------- | ----------- |
-| latest  | ✅ | https://github.com/Crell/fp |
+| Version | In scope | Source code                   |
+| ------- | -------- |-------------------------------|
+| latest  | ✅ | https://github.com/Crell/Path |
 
 Only the latest stable release of this library is supported.  In general, bug and security fixes will not be backported unless there is a substantial imminent threat to users in not doing so.  
 
 # How to Submit a Report
 
-To submit a vulnerability report, please contact us through [GitHub](https://github.com/Crell/fp/security). Your submission will be reviewed as soon as feasible, but as this is a volunteer project we cannot guarantee a response time.
+To submit a vulnerability report, please contact us through [GitHub](https://github.com/Crell/Path/security). Your submission will be reviewed as soon as feasible, but as this is a volunteer project we cannot guarantee a response time.
 
 # Safe Harbor
 
