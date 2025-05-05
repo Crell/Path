@@ -1,5 +1,21 @@
 parameters:
-	level: 6
-	paths:
-		- src
-		- tests
+    level: 8
+    paths:
+        - src
+        - tests
+
+    ignoreErrors:
+#        -
+#            message: '#type has no value type specified in iterable type array#'
+#            path: tests/
+#        -
+#            message: '#type has no value type specified in iterable type iterable#'
+#            path: tests/
+        # PHPStan is overly aggressive on readonly properties.
+        - '#Class (.*) has an uninitialized readonly property (.*). Assign it in the constructor.#'
+        - '#Readonly property (.*) is assigned outside of the constructor.#'
+        # PHPStan still doesn't know about PHP 8.4
+        - '#Readonly property (.*) is assigned outside of its declaring class.#'
+
+        # This feels buggy, or at least over-eager.
+        - '#Method (.*) should return static\((.*)\) but returns (.*)#'

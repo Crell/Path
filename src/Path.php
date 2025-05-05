@@ -28,10 +28,15 @@ abstract class Path implements \Stringable
      */
     protected function __construct() {}
 
-    protected function deriveIsFile(): bool
-    {
-        return str_contains($this->end, '.');
-    }
+    abstract protected static function createFromString(string $path): Path;
+
+    /**
+     * @param string[] $segments
+     *   An array of path segments
+     */
+    abstract protected static function createFromSegments(array $segments): Path;
+
+    abstract protected function deriveParent(): Path;
 
     public static function create(string $path): Path
     {
@@ -40,21 +45,11 @@ abstract class Path implements \Stringable
         }
         // @todo Probably more security filtering here.
 
-        $class = self::getClass($path);
+        $class = static::getClass($path);
         return $class::createFromString($path);
     }
 
-    abstract protected static function createFromString(string $path);
-
-    protected static function getClass(string $path): string
-    {
-        return match (true) {
-            str_starts_with($path, '/'), str_contains($path, AbsolutePath::StreamSeparator) => AbsolutePath::class,
-            default => PathFragment::class,
-        };
-    }
-
-    public function concat(string|Path $fragment): static
+    public function concat(string|Path $fragment): Path
     {
         if ($this->isFile) {
             throw new \InvalidArgumentException('Cannot append a path fragment onto a path to a file.');
@@ -71,6 +66,7 @@ abstract class Path implements \Stringable
         $combinedSegments = [...$this->segments, ...$fragment->segments];
 
         if ($this instanceof AbsolutePath) {
+            /* @phpstan-ignore arguments.count (Because PHPStan just hates statics.) */
             return static::createFromSegments($combinedSegments, $this->stream);
         }
 
@@ -93,5 +89,20 @@ abstract class Path implements \Stringable
         return $this->path;
     }
 
-    abstract protected function deriveParent(): static;
+    protected function deriveIsFile(): bool
+    {
+        return str_contains($this->end, '.');
+    }
+
+    /**
+     * @param string $path
+     * @phpstan-return class-string
+     */
+    protected static function getClass(string $path): string
+    {
+        return match (true) {
+            str_starts_with($path, '/'), str_contains($path, AbsolutePath::StreamSeparator) => AbsolutePath::class,
+            default => PathFragment::class,
+        };
+    }
 }

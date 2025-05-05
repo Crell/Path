@@ -18,14 +18,14 @@ class AbsolutePath extends Path
         get => $this->fileInfo ??= new \SplFileInfo($this->path);
     }
 
-    public function contents(): string
+    public function contents(): ?string
     {
-        return file_get_contents($this->path);
+        return file_get_contents($this->path) ?: null;
     }
 
-    protected static function createFromString(string $path)
+    protected static function createFromString(string $path): AbsolutePath
     {
-        $new = new static();
+        $new = new self();
         $new->path = $path;
 
         if (str_contains($path, self::StreamSeparator)) {
@@ -42,9 +42,13 @@ class AbsolutePath extends Path
         return $new;
     }
 
-    protected static function createFromSegments(array $segments, ?string $stream = null): static
+    /**
+     * @param string|null $stream
+     *   A stream name, like "ftp", "vfs", or "aws".
+     */
+    protected static function createFromSegments(array $segments, ?string $stream = null): AbsolutePath
     {
-        $new = new static();
+        $new = new self();
 
         $new->segments = $segments;
 

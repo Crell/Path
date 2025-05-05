@@ -11,6 +11,9 @@ use PHPUnit\Framework\TestCase;
 
 class PathTest extends TestCase
 {
+    /**
+     * @phpstan-param class-string $expectedClass
+     */
     #[Test]
     #[TestWith(['foo/bar', PathFragment::class])]
     #[TestWith(['/foo/bar', AbsolutePath::class])]
@@ -36,7 +39,7 @@ class PathTest extends TestCase
     /**
      * Test cases that are not compile time constant and so cannot be used in TestWith.
      */
-    public static function concatExamples(): iterable
+    public static function concatExamples(): \Generator
     {
         yield ['foo/bar', 'baz', 'foo/bar/baz'];
         yield ['/foo/bar', 'baz', '/foo/bar/baz'];
