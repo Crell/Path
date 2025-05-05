@@ -1,5 +1,5 @@
 {
-    "name": "crell/*",
+    "name": "crell/path",
     "require": {
         "php": "~8.4"
     },
@@ -10,13 +10,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Crell\\Foo\\": "src"
+            "Crell\\Path\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Crell\\Foo\\": "tests",
-            "Crell\\Foo\\Benchmarks\\": "benchmarks"
+            "Crell\\Path\\": "tests",
+            "Crell\\Path\\Benchmarks\\": "benchmarks"
         }
     },
     "scripts": {
