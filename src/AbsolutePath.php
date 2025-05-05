@@ -8,16 +8,30 @@ class AbsolutePath extends Path
 {
     public const string StreamSeparator = '://';
 
+    /**
+     * The stream this path uses, like "ftp", "vfs", "aws", etc.
+     *
+     * If the is just a `/` rooted path with no stream, this property is null.
+     */
     public readonly ?string $stream;
 
+    /**
+     * Whether or not this path actually exists on disk.
+     */
     public bool $exists {
         get => file_exists($this->path);
     }
 
+    /**
+     * The SPL file object of the file this path represents.
+     */
     public private(set) \SplFileInfo $fileInfo {
         get => $this->fileInfo ??= new \SplFileInfo($this->path);
     }
 
+    /**
+     * Returns the contents of the file this path represents, or null if the file does not actually exist.
+     */
     public function contents(): ?string
     {
         return file_get_contents($this->path) ?: null;

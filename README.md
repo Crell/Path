@@ -6,9 +6,7 @@
 
 `Crell/Path` is a simple library that provides typed value objects for handling paths.  Paths may be either a `PathFragment` (no leading `/`) or an `AbsolutePath`.  An `AbsolutePath` always begins either with a `/` or a stream identifier.
 
-The contents of an absolute path may also be retrieved.
-
-Otherwise, at this time paths are treated as abstract values and not coupled to a file system.  That functionality may be included at some point in the future.  Other feature requests (preferably with accompanying pull requests) are welcome.
+The contents of an absolute path may also be retrieved, if there is an actual file that it points to.
 
 A Path object's primary purpose is to centralize and abstract away the various and sundry complexities and edge cases of manipulating paths: Getting a parent path (have to handle the case where there isn't one, with or without a stream), Concatenating two paths (have to handle the leading/trailing slashes, accounting for when one path or the other is the root path), filtering out and rejecting suspicious paths that contain `..`, and so on.
 

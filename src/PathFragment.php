@@ -17,10 +17,6 @@ class PathFragment extends Path
         return $new;
     }
 
-    /**
-     * @param string[] $segments
-     *   An array of path segments
-     */
     protected static function createFromSegments(array $segments): PathFragment
     {
         $new = new self();
