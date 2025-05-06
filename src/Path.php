@@ -56,7 +56,7 @@ abstract class Path implements \Stringable
      *
      * Child classes should return their own type only.
      */
-    abstract protected static function createFromString(string $path): Path;
+    abstract protected static function createFromString(string $path): static;
 
     /**
      * Creates a new Path object from an array of path segments.
@@ -66,14 +66,14 @@ abstract class Path implements \Stringable
      * @param string[] $segments
      *   An array of path segments
      */
-    abstract protected static function createFromSegments(array $segments): Path;
+    abstract protected static function createFromSegments(array $segments): static;
 
     /**
      * Computes the path object representing the parent of the current path.
      *
      * Child classes should take care of the root case.
      */
-    abstract protected function deriveParent(): Path;
+    abstract protected function deriveParent(): static;
 
     /**
      * Creates a new path object.
@@ -97,7 +97,7 @@ abstract class Path implements \Stringable
      *
      * If this path already ends in a file, then concatenation is not allowed and an exception will be thrown.
      */
-    public function concat(string|Path $fragment): Path
+    public function concat(string|Path $fragment): static
     {
         if ($this->isFile) {
             throw new \InvalidArgumentException('Cannot append a path fragment onto a path to a file.');

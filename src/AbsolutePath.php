@@ -37,9 +37,9 @@ class AbsolutePath extends Path
         return file_get_contents($this->path) ?: null;
     }
 
-    protected static function createFromString(string $path): AbsolutePath
+    protected static function createFromString(string $path): static
     {
-        $new = new self();
+        $new = new static();
         $new->path = $path;
 
         if (str_contains($path, self::StreamSeparator)) {
@@ -60,9 +60,9 @@ class AbsolutePath extends Path
      * @param string|null $stream
      *   A stream name, like "ftp", "vfs", or "aws".
      */
-    protected static function createFromSegments(array $segments, ?string $stream = null): AbsolutePath
+    protected static function createFromSegments(array $segments, ?string $stream = null): static
     {
-        $new = new self();
+        $new = new static();
 
         $new->segments = $segments;
 

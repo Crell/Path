@@ -17,5 +17,5 @@ parameters:
         # PHPStan still doesn't know about PHP 8.4
         - '#Readonly property (.*) is assigned outside of its declaring class.#'
 
-        # This feels buggy, or at least over-eager.
-        - '#Method (.*) should return static\((.*)\) but returns (.*)#'
+        # PHPStan is way too aggressive on avoiding static, to the point that it cuts off useful functionality.
+        - '#Unsafe usage of new static#'

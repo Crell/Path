@@ -6,9 +6,9 @@ namespace Crell\Path;
 
 class PathFragment extends Path
 {
-    protected static function createFromString(string $path): PathFragment
+    protected static function createFromString(string $path): static
     {
-        $new = new self();
+        $new = new static();
         $new->path = $path;
         $new->ext = pathinfo($new->path, PATHINFO_EXTENSION);
 
@@ -17,9 +17,9 @@ class PathFragment extends Path
         return $new;
     }
 
-    protected static function createFromSegments(array $segments): PathFragment
+    protected static function createFromSegments(array $segments): static
     {
-        $new = new self();
+        $new = new static();
 
         $new->segments = $segments;
 
@@ -30,7 +30,7 @@ class PathFragment extends Path
         return $new;
     }
 
-    protected function deriveParent(): PathFragment
+    protected function deriveParent(): static
     {
         $segments = $this->segments;
         array_pop($segments);
